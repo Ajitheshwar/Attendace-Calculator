@@ -1,0 +1,74 @@
+<div class='text-center my-2'>
+    <button class='btn btn-light px-3 m-1 fs-5' (click)="todayDate()">Today's</button>
+    <button class='btn btn-light px-3 m-1 fs-5' (click)='allowPrevious()'>Previous</button>
+    <button class='btn btn-light px-3 m-1 fs-5' (click)='allowSubjectAttendance()'>Subject Attendance</button>
+</div>
+
+<div class='row'>
+    <div class="col-1"></div>
+    
+    <div *ngIf='!hasTimeTable' class="col-10 ">
+        <h3 class='text-center my-3 text-secondary'>You don't have time table to mark attendance.</h3>
+        <h3 class=' text-center text-secondary'>Add your time table in 'Time Table' section.</h3>
+    </div>
+
+    <div *ngIf='hasTimeTable' class="col-10 border rounded border-white pb-3">
+        <div *ngIf="!subjectAttendance">
+            <div *ngIf='!today' class='row pt-3 '>
+                <div class='col-12 col-sm-2 fs-4 mb-3'> Date : </div>
+                <div class='col-12 col-sm-10'>
+                    <form #ref='ngForm' class='row' (ngSubmit)="ref.form.valid && dateSubmit(ref)">
+                        <div class='col-4 col-sm-3 mb-3'>
+                            <input name='date' type="number" class="form-control" required ngModel #refDate='ngModel'>
+                            <p *ngIf="ref.submitted && refDate.errors?.['required']"> Date is Required </p>
+                        </div>
+                        <div class='col-4 col-sm-3 mb-3'>
+                            <input name='month' type="number" class="form-control" required ngModel #refMonth='ngModel'>
+                            <p *ngIf="ref.submitted && refMonth.errors?.['required']"> Month is Required </p>
+                        </div>
+                        <div class="col-4 col-sm-3 mb-3">
+                            <input value={{yy}} name='year' type="number" class="form-control" required ngModel #refYear='ngModel'>
+                            <p *ngIf="ref.submitted && refYear.errors?.['required']"> Year is Required </p>
+                        </div>
+                        <div class='col-12 col-sm-3 text-center'>
+                            <button type="submit" class='btn btn-outline-light rounded-pill px-3'>Submit</button>
+                        </div>
+                    </form>
+                    <p *ngIf='errDate' class='text-white'>{{errDateDes}}</p>
+                </div>
+            </div>
+            <p class='fs-4 my-4'>Date : {{date}}</p>
+            <div *ngIf="!inHistory">
+                <form *ngIf='y' #ref2='ngForm' (ngSubmit)="ref2.form.valid && postAttendance(ref2)" class='mt-4'>
+                    <div class='row px-3'>
+                        <div class="col-12 col-md-6 form-check" *ngFor="let s of subjects">
+                            <input class='form-check-input' type="checkbox" id={{s.subject}} name={{s.subject}} value='1' ngModel >
+                            <label class="form-check-label" for={{s.subject}}><p class='d-inline-block mb-0'><b>{{s.subject}} </b></p><p class='ms-3 d-inline-block'> ({{s.from}} - {{s.to}})</p></label>
+                        </div>
+                    </div>
+                    <button class='d-block mx-auto btn btn-outline-light px-3 rounded-pill' type="submit"> Post Attendance </button>
+                </form>    
+            </div>
+            <div *ngIf="inHistory">
+                <h3 class=' text-center text-secondary'>You Have already submitted attendance of {{date}}</h3>            
+            </div>
+        </div>
+        <div *ngIf="subjectAttendance">
+            <h5 class='text-center mt-4 mb-5'>Enter number of classes to be incremented for each Subject</h5>
+            <form #ref4 = 'ngForm' (ngSubmit)="ref4.form.valid && submitSubjectAttendance(ref4)">
+                <div *ngFor="let s of totalSubjects" class='row mx-auto mt-3' style = "max-width : 600px">
+                    <div class='col-12 col-sm-6'><label for="{{s.subject}}1" class='form-label'>{{s.subject}}</label></div>
+                    <div class='col-6 col-sm-3'><input class='form-control' type="number" id="{{s.subject}}1" name="{{s.subject}}1" ngModel placeholder="Attended"></div>
+                    <div class="col-6 col-sm-3"><input class='form-control' type="number" id="{{s.subject}}2" name="{{s.subject}}2" ngModel placeholder="Total"></div>
+                </div>
+                <div  *ngIf='errSubAttd' class=" mt-2 border border-secondary rounded p-2" >
+                    <p class='mt-3 mb-3 text-center'><span class='py-1 px-2 rounded m-2 bg-danger'>Error : </span> Attended must be less than or equal to Total </p>
+                    <p class='mt-3 mb-3 text-center'> Following Subjects have attended > total </p>
+                    <p *ngFor='let s of errSubAttdDesc' class='mb-1 text-center'>{{s}}</p>    
+                </div>
+                <button class='btn btn-outline-light px-3 rounded-pill d-block mx-auto my-3' type='submit'> Post Attendance</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>

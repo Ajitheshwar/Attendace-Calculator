@@ -1,0 +1,22 @@
+.circular-chart{
+    display: block;
+    margin : 10px auto;
+    max-width : 80%;
+    max-height : 250px;
+    background-color : white;
+    border-radius: 5%;
+    padding: 15px;
+}
+
+.circle{
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap : round;
+    animation: progress 2s ease-out forwards;
+}
+
+@keyframes progress {
+    0%{
+        stroke-dasharray: 0 100;
+    }
+}

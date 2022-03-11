@@ -1,0 +1,117 @@
+<button  class='mt-1 ms-1 btn btn-outline-light rounded-pill px-3' (click)='navigateToTimeTable()'>Close</button>
+
+<div class="row my-3">
+    <div class="col-1"></div>
+    <div class="col-10 rounded border border-white pb-3">
+        <h2 class="text-center  my-3">Add Time Table</h2>
+        <div class='rounded bourder p-2 border-white'>
+            <div class="text-center">
+                <span class="me-2 fs-5"><b>Subjects</b></span>
+                <div *ngFor="let s of subjects;index as i" class="text-center mt-1">
+                    <div class="border rounded mb-1 d-inline-block px-2 py-1"  style="width: 200px;">{{s.subject}}</div>
+                    <button class="btn btn-danger p-1 ms-1 mb-1" (click)="deleteSubject(i)">Delete</button>
+                </div>
+            </div>
+            <form #ref="ngForm" (ngSubmit)="addSubject(ref)">
+                <div class=" text-center my-2">
+                    <input type="text" class="form-control d-inline mt-2" id="subject" name="subject" style="width : 200px" autocomplete="off" ngModel required #refSubject='ngModel'>
+                    <p *ngIf="submitSubject && refSubject.errors?.['required']" class="text-white">Enter Subject</p>
+                    <p *ngIf='suberr'>Subject already exists</p>
+                    <button class="btn btn-secondary px-2 ms-1" type="submit"> Add</button>
+                </div>
+            </form>
+        </div>
+        <button class="btn btn-outline-light rounded-pill px-3 d-block mx-auto mb-3" (click)="doneSubjects()">Done</button>
+
+        <div *ngIf="y" class='rounded p-3 border border-white mb-2'>
+            <form *ngIf="y" #ref1="ngForm" (ngSubmit)="allowddtt(ref1)"> 
+                <div class="row">
+                    <div class="col-12 col-sm-8 col-md-6 mb-3">
+                        <div class=" input-group">
+                            <span class="input-group-text">Day</span>
+                            <select name="day" id="day" class="form-control" ngModel required #refday="ngModel">
+                                <option value="0">Sunday</option>
+                                <option value="1">Monday</option>
+                                <option value="2">Tuesday</option>
+                                <option value="3">Wedneday</option>
+                                <option value="4">Thursday</option>
+                                <option value="5">Friday</option>
+                                <option value="6">Saturday</option>
+                            </select>
+                        </div>    
+                        <p *ngIf="submitddttvar && refday.errors?.['required']" class="text-white text-center">Select Day</p>
+                        <p *ngIf="dayerror" class="text-white text-center">Time Table for {{week[day]}} already exists</p>
+                    </div>
+                    <div class="col">
+                        <button type="submit" class='btn btn-outline-light rounded-pill px-3 mb-2'> Add Time Table </button>
+                    </div>
+                </div>
+            </form>
+            <div *ngIf="x">
+                <hr>
+                <div class="row px-2">
+                    <div *ngFor="let tt of ddtt;index as i" class="col-12 col-md-6 text-center mb-1 border border-secondary rounded p-1">
+                        <b>{{tt.subject}}</b> : <p class="d-inline-block mb-0 my-1">{{tt.from}} - {{tt.to}} </p>
+                        <button class='btn btn-danger p-1 my-1 float-end' (click)="deleteddtt(i)"> Delete</button>
+                    </div>    
+                </div>
+                <form #ref2="ngForm" (ngSubmit)="ref2.form.valid && submitddtt(ref2)" class='mt-3'>
+                    <div class="row">
+                        <div class="col-12 col-md-5 mb-3">
+                            <div class="row">
+                                <div class="col-4 col-sm-3 col-md-4">
+                                    <label for="subject" class='form-label fs-5'>Subject</label>
+                                </div>
+                                <div class="col-8 col-sm-6 col-md-8">     
+                                    <select name="subject" id="subject" class="form-control" ngModel required #refSelectSubject="ngModel">
+                                        <option *ngFor="let s of subjects" value={{s.subject}}>{{s.subject}}</option>
+                                    </select>
+                                    <p *ngIf="submitted2 && refSelectSubject.errors?.['required']" class="text-white">Select Subject</p>
+                                </div>
+                            </div>
+                        </div>    
+                        <div class="col-12 col-md-5 mb-3">
+                            <div class='row'>
+                                <div class="col-2">
+                                    <label for="from" class="form-label fs-6">From</label>
+                                </div>
+                                <div class="col-4">
+                                    <input type="time" name="from" id="from" class="form-control" ngModel required #refFrom="ngModel">
+                                    <p *ngIf="submitted2 && refFrom.errors?.['required']" class="text-white">This field cannot be empty</p>    
+                                </div>
+                                <div class="col-2">
+                                    <label for="to" class="form-label fs-6">To</label>
+                                </div>
+                                <div class="col-4">
+                                    <input type="time" name="to" id="to" class="form-control" ngModel required #refTo="ngModel">    
+                                    <p *ngIf="submitted2 && refTo.errors?.['required']" class="text-white">This field cannot be empty</p>  
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-md-2 text-center">
+                            <button type="submit" class="btn btn-secondary"> Add </button>
+                        </div>
+                    </div>
+                    <p *ngIf="tterror" class="*text-white text-center">{{tterrordes}}</p>
+                    </form>
+                <hr>    
+                <div class="text-center">
+                    <button class='btn btn-outline-light px-3 rounded-pill' (click)="addTimeTable()">Update</button>
+                </div>
+            </div>
+        </div>
+
+        <div *ngFor="let tt of timetable;index as i" class='p-2 my-1 rounded border border-white'>
+            <h4>{{week[tt.day]}} <button class='btn btn-danger float-end' (click)='deletett(i)'>Delete</button>  </h4>
+            <div class="row">
+                <div *ngFor="let x of tt.ddtt" class="col-12 col-sm-6 col-lg-4 mb-3">
+                    <p class="mb-0"><b>{{x.subject}} : </b></p>  <p class="mb-0 ps-2"> {{x.from}} - {{x.to}}</p>
+                </div>
+            </div>
+        </div>
+        <button class='btn btn-outline-light px-3 d-block mx-auto my-3' (click)='updateTimeTable()'>Update Time Table</button>
+    </div>
+    <div class="col-1"></div>
+</div>
+
+<hr>

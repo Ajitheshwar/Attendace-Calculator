@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-1 col-md-3 col-lg-4"></div>
+    <div class="col-10 col-md-6 col-lg-4 bg-secondary mt-5 rounded p-1">
+        <div class="row">
+            <div class="col-6" *ngIf='newUser'><button class='btn d-block rounded-0 w-100 text-center py-3 text-white' (click)='allowLogin()'><h3>Login</h3></button></div>
+            <div class="col-6" *ngIf='newUser'><button class='btn d-block rounded-0 w-100 text-center py-3 btn-light' (click)='allowSignUp()'><h3>SignUp</h3></button></div>
+            <div class="col-6" *ngIf='!newUser'><button class='btn d-block rounded-0 w-100 text-center py-3 btn-light' (click)='allowLogin()'><h3>Login</h3></button></div>
+            <div class="col-6" *ngIf='!newUser'><button class='btn d-block rounded-0 w-100 text-center py-3 text-white' (click)='allowSignUp()'><h3>SignUp</h3></button></div>
+        </div>
+        <form #ref='ngForm' (ngSubmit)="submitForm(ref)" class='bg-white py-4 px-3'>    
+            <div class='row my-3'>
+                <div class="col-4"><label for="username" class='form-label text-dark'>Username</label></div>
+                <div class="col-8">
+                    <input type="text" id='username' name='username' class='form-control' ngModel #refUsername='ngModel' required autocomplete="off">
+                    <p class="text-danger" *ngIf="(ref.submitted || refUsername.touched) && refUsername.errors?.['required']">*Username is required</p>
+                </div>                
+            </div>
+            <div class='row mb-3'>
+                <div class="col-4"><label for="password" class='form-label text-dark'>Password</label></div>
+                <div class="col-8">
+                    <input type="password" id='password' name='password' class='form-control' ngModel #refPassword='ngModel' required autocomplete="off">
+                    <p class="text-danger" *ngIf="(ref.submitted || refPassword.touched) && refPassword.errors?.['required']">*Password is required</p>
+                </div>  
+            </div>
+            <button type="submit" class='btn d-block mx-auto py-2 px-3 mb-3 rounded-pill btn-success'>Submit</button>
+        </form>
+    </div>
+    <div class="col-1 col-md-3 col-lg-4"></div>
+</div>

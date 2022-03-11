@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-10 border border-white rounded p-3 mt-3">
+        <div class='d-inline-block m-3'>        
+            <span class='bg-white p-1 me-2 rounded'> <span class='bg-success ps-3 pe-1 rounded-circle'></span></span> Safe (>75%)
+        </div>
+        <div class='d-inline-block m-3'>
+            <span class='bg-white p-1 me-2 rounded'> <span class='bg-warning ps-3 pe-1 rounded-circle'></span></span> Warning (>65%)   
+        </div>
+        <div class='d-inline-block m-3'>
+            <span class='bg-white p-1 me-2 rounded'> <span class='bg-danger ps-3 pe-1 rounded-circle'></span></span> Danger (< 65%)
+        </div>
+        <h2 *ngIf='subjects.length==0' class='text-secondary text-center my-3'> No Subjects </h2>
+        <div >
+            <div *ngFor='let s of subjects' class='border rounded border-secondary p-3 mt-3'>
+                <h3>{{s.subject}}</h3>
+                <div *ngIf='calculatePercentage(s.attended,s.total) >= 75' class="progress my-2 bg-light" style ="padding : 1px">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success rounded" role="progressbar" attr.aria-valuenow="{{calculatePercentage(s.attended,s.total)}}" attr.style="width: {{calculatePercentage(s.attended,s.total)}}%;" aria-valuemin="0" aria-valuemax="100">{{calculatePercentage(s.attended,s.total)}}%</div>
+                </div>
+                <div *ngIf='calculatePercentage(s.attended,s.total) >= 65 && calculatePercentage(s.attended,s.total) <75' class="progress my-2 bg-light" style ="padding : 1px">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning rounded" role="progressbar" attr.aria-valuenow="{{calculatePercentage(s.attended,s.total)}}" attr.style="width: {{calculatePercentage(s.attended,s.total)}}%;" aria-valuemin="0" aria-valuemax="100">{{calculatePercentage(s.attended,s.total)}}%</div>
+                </div>
+                <div *ngIf='calculatePercentage(s.attended,s.total) < 65' class="progress my-2 bg-light" style ="padding : 1px">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger rounded" role="progressbar" attr.aria-valuenow="{{calculatePercentage(s.attended,s.total)}}" attr.style="width: {{calculatePercentage(s.attended,s.total)}}%;" aria-valuemin="0" aria-valuemax="100">{{calculatePercentage(s.attended,s.total)}}%</div>
+                </div>
+                <h5>{{s.attended}}/{{s.total}} ({{calculatePercentage(s.attended,s.total)}}%) </h5>
+            </div>
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>

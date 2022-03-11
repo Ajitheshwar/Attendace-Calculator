@@ -1,0 +1,48 @@
+<button class='btn btn-danger px-3 d-block ms-auto my-2 me-2' (click)='clearHistory()'>Clear History</button>
+
+<div class='row'>
+    <div class="col-1"></div>
+    <div class="col-10 rounded border border-white p-3">
+        <h2 *ngIf="history.length==0" class=' my-3 text-secondary text-center'> No History </h2>
+        <div *ngIf="history.length!=0" class='row pt-3 mb-3'>
+            <div class='col-12 col-sm-2 fs-4 mb-3 text-center'> Date : </div>
+            <div class='col-12 col-sm-10'>
+                <form #ref='ngForm' class='row' (ngSubmit)="ref.form.valid && dateSubmit(ref)">
+                    <div class='col-4 col-sm-3 mb-3'>
+                        <input name='date' type="number" class="form-control" required ngModel #refDate='ngModel'>
+                        <p *ngIf="ref.submitted && refDate.errors?.['required']"> Date is Required </p>
+                    </div>
+                    <div class='col-4 col-sm-3 mb-3'>
+                        <input name='month' type="number" class="form-control" required ngModel #refMonth='ngModel'>
+                        <p *ngIf="ref.submitted && refMonth.errors?.['required']"> Month is Required </p>
+                    </div>
+                    <div class="col-4 col-sm-3 mb-3">
+                        <input value={{yy}} name='year' type="number" class="form-control" required ngModel #refYear='ngModel'>
+                        <p *ngIf="ref.submitted && refYear.errors?.['required']"> Year is Required </p>
+                    </div>
+                    <div class='col-12 col-sm-3 text-center'>
+                        <button type="submit" class='btn btn-outline-light rounded-pill px-3'>Submit</button>
+                    </div>
+                </form>
+                <p *ngIf='errDate' class='text-white'>{{errDateDes}}</p>
+            </div>
+        </div>
+        <div [id]='x.date' *ngFor='let x of history' class='border border-secondary p-3 mb-3 rounded'>
+            <h3>{{x.date}}</h3> 
+            <div class="row">
+                <div *ngFor='let y of x.attendance' class="col-12 col-md-6 col-lg-4 mb-2">
+                    <div class="card bg-dark h-100">
+                        <div class="card-body">    
+                            <p style = 'font-size: 18px;'>{{y.subject}}</p>
+                        </div>
+                        <div class="card-footer ">
+                            <p *ngIf='y.attended==0' class='mb-2 bg-danger rounded py-1 ps-3'>{{y.subjectAttended}}+{{y.attended}}/{{y.subjectTotal}}+{{y.total}} =>{{y.subjectAttended + y.attended}}/{{y.subjectTotal + y.total}} ({{calculatePercentage(y)}}%) </p>
+                            <p *ngIf='y.attended!=0' class='mb-2 bg-success rounded py-1 ps-3'>{{y.subjectAttended}}+{{y.attended}}/{{y.subjectTotal}}+{{y.total}} =>{{y.subjectAttended + y.attended}}/{{y.subjectTotal + y.total}} ({{calculatePercentage(y)}}%) </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>

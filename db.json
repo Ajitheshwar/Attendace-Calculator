@@ -1,0 +1,424 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "timetable": [
+        {
+          "day": 1,
+          "ddtt": [
+            {
+              "subject": "Data Mining",
+              "from": "10:00",
+              "to": "11:30"
+            },
+            {
+              "subject": "Computer Graphics",
+              "from": "11:30",
+              "to": "13:00"
+            },
+            {
+              "subject": "Constitution Of India",
+              "from": "14:00",
+              "to": "16:00"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "ddtt": [
+            {
+              "subject": "Formal Language and Automata Theory",
+              "from": "10:00",
+              "to": "11:30"
+            },
+            {
+              "subject": "Artificial Intelligence",
+              "from": "11:30",
+              "to": "13:00"
+            },
+            {
+              "subject": "Data Mining",
+              "from": "14:00",
+              "to": "15:30"
+            },
+            {
+              "subject": "Software Engineering",
+              "from": "15:30",
+              "to": "17:00"
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "ddtt": [
+            {
+              "subject": "Computer Graphics",
+              "from": "10:00",
+              "to": "11:30"
+            },
+            {
+              "subject": "Formal Language and Automata Theory",
+              "from": "11:30",
+              "to": "13:00"
+            },
+            {
+              "subject": "Computer Networks Lab",
+              "from": "14:00",
+              "to": "17:00"
+            }
+          ]
+        },
+        {
+          "day": 4,
+          "ddtt": [
+            {
+              "subject": "Computer Networks",
+              "from": "10:00",
+              "to": "11:30"
+            },
+            {
+              "subject": "Artificial Intelligence",
+              "from": "11:30",
+              "to": "13:00"
+            },
+            {
+              "subject": "Software Engineering Lab",
+              "from": "14:00",
+              "to": "17:00"
+            }
+          ]
+        },
+        {
+          "day": 5,
+          "ddtt": [
+            {
+              "subject": "Advance English Communication Lab",
+              "from": "10:00",
+              "to": "12:00"
+            },
+            {
+              "subject": "Computer Networks",
+              "from": "14:00",
+              "to": "15:30"
+            },
+            {
+              "subject": "Software Engineering",
+              "from": "15:30",
+              "to": "17:00"
+            }
+          ]
+        }
+      ],
+      "subjects": [
+        {
+          "subject": "Computer Networks",
+          "attended": 10,
+          "total": 15
+        },
+        {
+          "subject": "Artificial Intelligence",
+          "attended": 3,
+          "total": 11
+        },
+        {
+          "subject": "Computer Graphics",
+          "attended": 12,
+          "total": 14
+        },
+        {
+          "subject": "Data Mining",
+          "attended": 1,
+          "total": 1
+        },
+        {
+          "subject": "Formal Language and Automata Theory",
+          "attended": 10,
+          "total": 15
+        },
+        {
+          "subject": "Software Engineering",
+          "attended": 2,
+          "total": 2
+        },
+        {
+          "subject": "Software Engineering Lab",
+          "attended": 0,
+          "total": 0
+        },
+        {
+          "subject": "Computer Networks Lab",
+          "attended": 0,
+          "total": 0
+        },
+        {
+          "subject": "Advance English Communication Lab",
+          "attended": 1,
+          "total": 1
+        },
+        {
+          "subject": "Constitution Of India",
+          "attended": 0,
+          "total": 0
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "history": [
+        {
+          "date": "28-1-2022 Friday",
+          "attendance": [
+            {
+              "subject": "Advance English Communication Lab",
+              "attended": 1,
+              "total": 1,
+              "subjectAttended": 0,
+              "subjectTotal": 0
+            },
+            {
+              "subject": "Computer Networks",
+              "attended": 0,
+              "total": 1,
+              "subjectAttended": 0,
+              "subjectTotal": 0
+            },
+            {
+              "subject": "Software Engineering",
+              "attended": 1,
+              "total": 1,
+              "subjectAttended": 0,
+              "subjectTotal": 0
+            }
+          ]
+        },
+        {
+          "date": "30-1-2022 Sunday",
+          "attendance": [
+            {
+              "subject": "Computer Networks",
+              "attended": 10,
+              "total": 14,
+              "subjectAttended": 0,
+              "subjectTotal": 0
+            },
+            {
+              "subject": "Artificial Intelligence",
+              "attended": 0,
+              "total": 0,
+              "subjectAttended": 0,
+              "subjectTotal": 0
+            },
+            {
+              "subject": "Computer Graphics",
+              "attended": 12,
+              "total": 14,
+              "subjectAttended": 0,
+              "subjectTotal": 0
+            },
+            {
+              "subject": "Data Mining",
+              "attended": 0,
+              "total": 0,
+              "subjectAttended": 0,
+              "subjectTotal": 0
+            },
+            {
+              "subject": "Formal Language and Automata Theory",
+              "attended": 10,
+              "total": 14,
+              "subjectAttended": 0,
+              "subjectTotal": 0
+            },
+            {
+              "subject": "Software Engineering",
+              "attended": 0,
+              "total": 0,
+              "subjectAttended": 0,
+              "subjectTotal": 0
+            },
+            {
+              "subject": "Software Engineering Lab",
+              "attended": 0,
+              "total": 0,
+              "subjectAttended": 0,
+              "subjectTotal": 0
+            },
+            {
+              "subject": "Computer Networks Lab",
+              "attended": 0,
+              "total": 0,
+              "subjectAttended": 0,
+              "subjectTotal": 0
+            },
+            {
+              "subject": "Advance English Communication Lab",
+              "attended": 0,
+              "total": 0,
+              "subjectAttended": 0,
+              "subjectTotal": 0
+            },
+            {
+              "subject": "Constitution Of India",
+              "attended": 0,
+              "total": 0,
+              "subjectAttended": 0,
+              "subjectTotal": 0
+            }
+          ]
+        },
+        {
+          "date": "25-1-2022 Tuesday",
+          "attendance": [
+            {
+              "subject": "Formal Language and Automata Theory",
+              "attended": 0,
+              "total": 1,
+              "subjectAttended": 10,
+              "subjectTotal": 14
+            },
+            {
+              "subject": "Artificial Intelligence",
+              "attended": 1,
+              "total": 1,
+              "subjectAttended": 0,
+              "subjectTotal": 0
+            },
+            {
+              "subject": "Data Mining",
+              "attended": 1,
+              "total": 1,
+              "subjectAttended": 0,
+              "subjectTotal": 0
+            },
+            {
+              "subject": "Software Engineering",
+              "attended": 1,
+              "total": 1,
+              "subjectAttended": 1,
+              "subjectTotal": 1
+            }
+          ]
+        },
+        {
+          "date": "30-1-2022 Sunday",
+          "attendance": [
+            {
+              "subject": "Computer Networks",
+              "attended": 0,
+              "total": 0,
+              "subjectAttended": 10,
+              "subjectTotal": 15
+            },
+            {
+              "subject": "Artificial Intelligence",
+              "attended": 2,
+              "total": 10,
+              "subjectAttended": 1,
+              "subjectTotal": 1
+            },
+            {
+              "subject": "Computer Graphics",
+              "attended": 0,
+              "total": 0,
+              "subjectAttended": 12,
+              "subjectTotal": 14
+            },
+            {
+              "subject": "Data Mining",
+              "attended": 0,
+              "total": 0,
+              "subjectAttended": 1,
+              "subjectTotal": 1
+            },
+            {
+              "subject": "Formal Language and Automata Theory",
+              "attended": 0,
+              "total": 0,
+              "subjectAttended": 10,
+              "subjectTotal": 15
+            },
+            {
+              "subject": "Software Engineering",
+              "attended": 0,
+              "total": 0,
+              "subjectAttended": 2,
+              "subjectTotal": 2
+            },
+            {
+              "subject": "Software Engineering Lab",
+              "attended": 0,
+              "total": 0,
+              "subjectAttended": 0,
+              "subjectTotal": 0
+            },
+            {
+              "subject": "Computer Networks Lab",
+              "attended": 0,
+              "total": 0,
+              "subjectAttended": 0,
+              "subjectTotal": 0
+            },
+            {
+              "subject": "Advance English Communication Lab",
+              "attended": 0,
+              "total": 0,
+              "subjectAttended": 1,
+              "subjectTotal": 1
+            },
+            {
+              "subject": "Constitution Of India",
+              "attended": 0,
+              "total": 0,
+              "subjectAttended": 0,
+              "subjectTotal": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "marks": [
+        {
+          "title": "BTech III Year I Semester Mid",
+          "marks": [
+            {
+              "subject": "Computer Networks",
+              "marks": 22,
+              "total": 25
+            },
+            {
+              "subject": "Artificial Intelligence",
+              "marks": 22,
+              "total": 25
+            },
+            {
+              "subject": "Computer Graphics",
+              "marks": 22,
+              "total": 25
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "semester": [
+        {
+          "title": "BTech III Year I Semester End Exam",
+          "marks": [
+            {
+              "subject": "Computer Networks",
+              "marks": 8
+            },
+            {
+              "subject": "Artificial Intelligence",
+              "marks": 8
+            }
+          ],
+          "SGPA": 8.68
+        }
+      ]
+    }
+  ]
+}

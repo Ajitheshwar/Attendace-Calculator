@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand fs-5 ms-3">Attendance Calculator</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item mx-2">
+            <a class="nav-link text-center fs-6" routerLink="profile" routerLinkActive="active"> Profile </a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link text-center fs-6" routerLink="attendance" routerLinkActive="active"> Attendance </a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link text-center fs-6" routerLink="marks" routerLinkActive="active" > Marks </a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link text-center fs-6" routerLink="" (click)='logOut()'> LogOut </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <router-outlet></router-outlet>

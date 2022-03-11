@@ -1,0 +1,17 @@
+<button  class=' mb-3 d-block ms-auto mt-1 me-1 btn btn-outline-light' (click)='edit=true' routerLink="addTimeTable" routerLinkActive="active">{{str}}</button>
+<router-outlet></router-outlet>
+
+<h3 *ngIf='str=="Add Time Table"' class='my-3 text-center text-secondary'> You don't have a time table</h3>
+<div class='row'>
+    <div class="col-1"></div>
+    <div class="col-10">
+        <div *ngFor='let x of timeTable' class="row border rounded p-3">
+            <h2 class='mb-3'>{{week[x.day]}}</h2>
+            <div *ngFor='let y of x.ddtt' class='col-12 col-sm-6 col-md-4 col-lg-3 mb-3'>
+                <b>{{y.subject}}</b><br>
+                ({{y.from}} - {{y.to}})
+            </div>
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>

@@ -1,0 +1,37 @@
+<svg viewBox = '0 0 36 36' class='circular-chart'>
+    <path *ngIf="hasSubjects && percentage>=65 && percentage<=75"
+    style='stroke: rgb(216, 143, 7);'
+        class='circle'
+        d="M18 2.0845
+        a 15.9155 15.9155 0 0 1 0 31.831
+        a 15.9155 15.9155 0 0 1 0 -31.831"
+        attr.stroke-dasharray='{{percentage}},100'
+    />
+    <path *ngIf="hasSubjects && percentage>75"
+        style='stroke: rgb(25, 100, 25);'
+        class='circle'
+        d="M18 2.0845
+        a 15.9155 15.9155 0 0 1 0 31.831
+        a 15.9155 15.9155 0 0 1 0 -31.831"
+        attr.stroke-dasharray='{{percentage}},100'
+    />
+    <path *ngIf="hasSubjects && percentage<65"
+        style='stroke: rgb(221, 11, 11);'
+        class='circle'
+        d="M18 2.0845
+        a 15.9155 15.9155 0 0 1 0 31.831
+        a 15.9155 15.9155 0 0 1 0 -31.831"
+        attr.stroke-dasharray='{{percentage}},100'
+    />
+    <path
+        style='stroke: rgba(100, 25, 25, 0.151);fill: none;stroke-width: 3.5;'
+        d="M18 2.0845
+        a 15.9155 15.9155 0 0 1 0 31.831
+        a 15.9155 15.9155 0 0 1 0 -31.831"
+        attr.stroke-dasharray='100,100'
+    />
+    <text *ngIf='hasSubjects' x='18' y='20.35' style="font-size : 0.55em; text-anchor : middle ; font-weight : 500">{{percentage}}%</text>
+    <text *ngIf='!hasSubjects' x='18' y='20.35' style="font-size : 0.55em; text-anchor : middle ; font-weight : 500">-- % </text>
+</svg>  
+ 
+<h1 class='text-center text-secondary my-4 display-1'> <b>CGPA</b> : {{CGPA}} </h1>
