@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataService } from '../data.service';
 
 @Component({
@@ -8,15 +9,14 @@ import { DataService } from '../data.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private data : DataService) { }
+  constructor(private data : DataService,private router : Router) { }
 
   ngOnInit(): void {
-    this.percentage = 63
+    console.log(this.userDetails)
 
     this.data.subjectsObservable.subscribe(
       {
         next : data => {
-          //console.log(data)
           if(data.length==0)
           {
             this.hasSubjects = false
@@ -56,9 +56,110 @@ export class ProfileComponent implements OnInit {
         }
       }
     )
+
+    this.data.linksObservable.subscribe(
+      {
+        next : data => { this.links = data},
+        error : err=>{console.log("error in subscribing links " +err)}
+      }
+    )
+
+    this.data.notesObservable.subscribe(
+      {
+        next : data=>{this.notes = data},
+        error : err => { console.log("error in subscribing notes : " +err)}
+      }
+    )
+    this.editDetails = false
+    this.data.userDetailsObervable.subscribe({
+      next : data => { this.userDetails= data},
+      error : err => { console.log("error in user details : "+err)}
+    })
   }
 
+  editDetails : boolean = false
+  isLink : boolean = true
   CGPA : number = 0
   percentage : number = 0
   hasSubjects : boolean = true
+  links : any[] = [{name : "ajith", url : "https://getbootstrap.com/docs/5.1/layout/gutters/#horizontal--vertical-gutters"},{name : "ajith", url : "abcd"},{name : "ajith", url : "abcd"},{name : "ajith", url : "abcd"},]
+  notes : any[]= ["Ajith is a good boy Ajith is a good boy Ajith is a good boy Ajith is a good boy Ajith is a good boy ","Ajith is a good boy Ajith is a good boy Ajith is a good boy Ajith is a good boy Ajith is a good boy ","Ajith is a good boy Ajith is a good boy Ajith is a good boy Ajith is a good boy Ajith is a good boy "]
+  userDetails = {college : "", rollno : "", bio : "", name : ""}
+
+  deleteNote(i : any)
+  {
+    let obj = {edit : false, isLink : false, delete : true, index : i}
+    this.data.deleteLinkNote(obj).subscribe(
+      {
+        next : data => {
+          alert(data.message)
+          this.data.updateNotes(data.data)
+        },
+        error : err=> {console.log("error in deleting notes "+ err)}
+      }
+    )
+  }
+
+  deleteLink(i : any)
+  {
+    if(window.confirm(`Do you want to delete link${this.links[i].name}?`))
+    {
+      let obj = {edit : false, isLink : true, delete : true, index : i}
+      this.data.deleteLinkNote(obj).subscribe(
+        {
+          next : data => {
+            alert(data.message)
+            this.data.updateLinks(data.data)
+          },
+          error : err=> {console.log("error in deleting link "+ err)}
+        }
+      )
+    }
+  }
+
+
+  submitForm(ref : any)
+  {
+    let obj = {edit : false, isLink : this.isLink,delete : false, data : ref.value}
+    console.log(obj)
+    this.data.submitNoteLinkEdit(obj).subscribe(
+      {
+        next : data => 
+        {
+          alert(data.message)
+          if(data.message == "Login to Continue!!!")
+          {
+            this.router.navigateByUrl("/login")
+          }
+          else
+          {
+            if(this.isLink)
+            {
+              this.data.updateLinks(data.data)
+            }
+            else
+            {
+              this.data.updateNotes(data.data)
+            }
+          }
+        },
+        error : err => {console.log("error in updating note, link " + err)}
+      }
+    )
+  }
+
+  submitEditDetails(ref :any)
+  {
+    this.editDetails = false;
+    let obj = { edit : true, data : ref.value}
+    this.data.submitNoteLinkEdit(obj).subscribe(
+      {
+        next : data =>{
+          alert(data.message)
+          this.data.updateUserDetails(data.data)
+        }
+      }
+    )
+  }
+
 }

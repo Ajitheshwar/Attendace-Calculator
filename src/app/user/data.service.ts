@@ -13,8 +13,8 @@ export class DataService {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
 
     // Get Token from browser storage 
-    let token=sessionStorage.getItem("token")
-
+    let token=localStorage.getItem("token")
+    console.log(token)
     //Token existance
     if(token){
 
@@ -31,7 +31,26 @@ export class DataService {
     }
   }
 
+  userDetails = new BehaviorSubject<any>([])
+  userDetailsObervable = this.userDetails.asObservable()
+  updateUserDetails(obj :any)
+  {
+    this.userDetails.next(obj)
+  }
 
+  links = new BehaviorSubject<any>([])
+  linksObservable = this.links.asObservable()
+  updateLinks(l : any)
+  {
+    this.links.next(l)
+  }
+
+  notes = new BehaviorSubject<any>([])
+  notesObservable = this.notes.asObservable()
+  updateNotes(n : any)
+  {
+    this.notes.next(n)
+  }
 
 
   timetable = new BehaviorSubject<any>([])
@@ -110,24 +129,23 @@ export class DataService {
     return this.http.put<any>("/user/"+uid+"/marks/addMarks",obj)
   }
 
-  deleteMarks(i : any)
+  deleteMarks(i : any) : Observable<any>
   {
     let id = localStorage.getItem("id");
     //consolelog(i)
-    this.http.put<any>("user/"+id+"/marks",i).subscribe(
-      {
-        next : data => {
-          alert(data.message)
-          if(data.varSemester)
-          {
-            this.updateSemesterMarks(data.data)
-          }
-          else
-          {
-            this.updateMarks(data.data)
-          }
-        }
-      }
-    )
+     return this.http.put<any>("user/"+id+"/marks",i)
+  }
+
+  submitNoteLinkEdit(obj : any) : Observable<any>
+  {
+    let id = localStorage.getItem("id")
+    return this.http.put<any>("/user/"+id+"/profile",obj)
+  }
+
+    
+  deleteLinkNote(obj : any) : Observable<any>
+  {
+    let id = localStorage.getItem("id")
+    return this.http.put<any>("/user/"+id+"/profile",obj)
   }
 }

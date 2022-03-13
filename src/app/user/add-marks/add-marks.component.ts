@@ -119,13 +119,19 @@ export class AddMarksComponent implements OnInit {
         {
           next : data=>{
             alert(data.message)
-            if(!data.var)
-            {  
-              this.data.updateMarks(data.data)
-            }
-            else
+            if(data.message=='Login to Continue!!!')
             {
-              this.data.updateSemesterMarks(data.data)
+              this.router.navigateByUrl("/login")
+            }
+            else{
+              if(!data.var)
+              {  
+                this.data.updateMarks(data.data)
+              }
+              else
+              {
+                this.data.updateSemesterMarks(data.data)
+              }
             }
           },
           error : err=>{ console.log("error in updating marks : "+err)}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataService } from '../data.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { DataService } from '../data.service';
 export class HistoryComponent implements OnInit {
 
 
-  constructor(private data : DataService) { }
+  constructor(private data : DataService, private router : Router) { }
 
   ngOnInit(): void {
 
@@ -116,7 +117,12 @@ export class HistoryComponent implements OnInit {
       {
         next : data =>{ 
           alert(data.message)
-          this.data.updateHistory([])
+          if(data.message=='Login to Continue!!!')
+            {
+              this.router.navigateByUrl("/login")
+            }
+          else
+            this.data.updateHistory([])
         },
         error : err => { console.log("error in deleting history : "+err)}
       }

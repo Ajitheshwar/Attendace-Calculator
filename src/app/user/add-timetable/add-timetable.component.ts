@@ -199,8 +199,15 @@ export class AddTimetableComponent implements OnInit {
       this.data.setTimetable(this.timetable,this.subjects).subscribe(
         {
           next : data =>{ 
-            alert('Time Table successfully updated :)')
-            this.navigateToTimeTable()
+            alert(data.message)
+            if(data.message=='Login to Continue!!!')
+            {
+              this.router.navigateByUrl("/login")
+            }
+            else
+            {
+              this.navigateToTimeTable()
+            }
           },
           error : err =>{console.log("error in updating time table : "+err)}
         },

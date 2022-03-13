@@ -7,7 +7,38 @@
             <div class="col-6" *ngIf='!newUser'><button class='btn d-block rounded-0 w-100 text-center py-3 btn-light' (click)='allowLogin()'><h3>Login</h3></button></div>
             <div class="col-6" *ngIf='!newUser'><button class='btn d-block rounded-0 w-100 text-center py-3 text-white' (click)='allowSignUp()'><h3>SignUp</h3></button></div>
         </div>
-        <form #ref='ngForm' (ngSubmit)="submitForm(ref)" class='bg-white py-4 px-3'>    
+        <form #ref='ngForm' (ngSubmit)="ref.valid && submitForm(ref)" class='bg-white py-4 px-3'>    
+            <div *ngIf="newUser">
+                <div class='row mb-3'>
+                    <div class="col-4"><label for="name" class='form-label text-dark'>Name</label></div>
+                    <div class="col-8">
+                        <input type="text" id='name' name='name' class='form-control' ngModel #refname='ngModel' required autocomplete="off">
+                        <p class="text-danger" *ngIf="(ref.submitted || refname.touched) && refname.errors?.['required']">*Name is required</p>
+                    </div>  
+                </div>
+                <div class='row mb-3'>
+                    <div class="col-4"><label for="college" class='form-label text-dark'>College</label></div>
+                    <div class="col-8">
+                        <input type="text" id='college' name='college' class='form-control' ngModel #refCollege='ngModel' required autocomplete="off">
+                        <p class="text-danger" *ngIf="(ref.submitted || refCollege.touched) && refCollege.errors?.['required']">*College is required</p>
+                    </div>  
+                </div>
+                <div class='row mb-3'>
+                    <div class="col-4"><label for="rollno" class='form-label text-dark'>Roll No.</label></div>
+                    <div class="col-8">
+                        <input type="text" id='rollno' name='rollno' class='form-control' ngModel #refrollno='ngModel' required autocomplete="off">
+                        <p class="text-danger" *ngIf="(ref.submitted || refrollno.touched) && refrollno.errors?.['required']">*RollNo. is required</p>
+                    </div>  
+                </div>
+                
+                <div class='row mb-3'>
+                    <div class="col-4"><label for="bio" class='form-label text-dark'>Bio (Optional)</label></div>
+                    <div class="col-8">
+                        <textarea name="bio" id="bio" class="form-control" rows="3" ngModel></textarea>
+                    </div>  
+                </div>
+                
+            </div>
             <div class='row my-3'>
                 <div class="col-4"><label for="username" class='form-label text-dark'>Username</label></div>
                 <div class="col-8">

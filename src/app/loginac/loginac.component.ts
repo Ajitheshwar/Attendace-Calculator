@@ -33,14 +33,13 @@ export class LoginacComponent implements OnInit {
 
   submitForm(ref : NgForm)
   {
-    let obj = {newUser : this.newUser, username : ref.value.username, password : ref.value.password}
+    let obj = {newUser : this.newUser, data : ref.value}
     this.data.loginSignUp(obj).subscribe(
       {
         next : data => {
           if(this.newUser)
           {
             alert(data.message)
-            this.newUser = false;
           }
           else
           {
@@ -50,8 +49,7 @@ export class LoginacComponent implements OnInit {
               let id = data.id
               this.login = false
               localStorage.setItem("id",id)
-              let url = `/user/${id}/profile`
-              this.router.navigateByUrl(url)
+              this.router.navigateByUrl("user/"+id)
             }
             else
             {

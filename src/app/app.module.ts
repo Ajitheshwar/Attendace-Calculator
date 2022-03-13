@@ -5,14 +5,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
 import { LoginacComponent } from './loginac/loginac.component';
 import { DataService } from './user/data.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     LoginacComponent,
   ],
   imports: [

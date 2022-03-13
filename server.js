@@ -35,11 +35,10 @@ mc.connect(dburl,{useNewUrlParser:true, useUnifiedTopology:true})
 .catch(err=>{console.log("error in connecting to database : ",err)})
 
 
-
 app.post('/login',expressAysncHandler(async(req,res,next)=>{
     
-    let obj = req.body;
-    if(!obj.newUser)
+    let obj = req.body.data;
+    if(!req.body.newUser)
     {
         let userOfDB = await usersObj.findOne({username : obj.username})
         if(userOfDB!=null){
@@ -51,7 +50,7 @@ app.post('/login',expressAysncHandler(async(req,res,next)=>{
             }
             else{
                 let signedtoken = await jwt.sign({username : obj.username},process.env.SecretKey)
-                
+                console.log(signedtoken)
                 res.send({message : "Logged In Successfully",id :userOfDB._id,token : signedtoken})
             }
         }
@@ -64,10 +63,11 @@ app.post('/login',expressAysncHandler(async(req,res,next)=>{
         if(userOfDB!=null){
             res.send({message : `User with Username ${obj.username} already exists!!!`})
         }
-        else{
+        else
+        {
             let hashedPwd = await bcrypt.hash(obj.password,6)
-
-            obj1 = {username : obj.username, password : hashedPwd, subjects : [],timetable : [],history : [],marks : [], semester : []}
+            let obj2 = {rollno : obj.rollno, college : obj.college, name : obj.name, bio : obj.bio}
+            obj1 = {username : obj.username, password : hashedPwd,links : [], notes : [], userDetails : obj2, subjects : [],timetable : [],history : [],marks : [], semester : []}
             usersObj.insertOne(obj1)
             res.send({message : "User created successfully!!!"})
         }
@@ -75,4 +75,9 @@ app.post('/login',expressAysncHandler(async(req,res,next)=>{
 }))
 
 const userApiRoute = require('./apis/userAPI')
+const expressAsyncHandler = require("express-async-handler")
 app.use("/user",userApiRoute)
+
+app.use((req,res,next)=>{
+    res.send({message : "ABCD"})
+})

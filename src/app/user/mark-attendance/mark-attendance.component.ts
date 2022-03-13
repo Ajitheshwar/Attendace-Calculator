@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataService } from '../data.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { DataService } from '../data.service';
 })
 export class MarkAttendanceComponent implements OnInit {
 
-  constructor(private data : DataService) { }
+  constructor(private data : DataService,private router : Router) { }
 
 
   ngOnInit(): void {
@@ -262,8 +263,15 @@ export class MarkAttendanceComponent implements OnInit {
        {
          next : data =>{
                   alert(data.message)
-                  this.data.updateSubjects(data.data.subjects)
-                  this.data.updateHistory(data.data.history)
+                  if(data.message=='Login to Continue!!!')
+                  {
+                    this.router.navigateByUrl("/login")
+                  }
+                  else
+                  {
+                    this.data.updateSubjects(data.data.subjects)
+                    this.data.updateHistory(data.data.history)
+                  }
                 },
         error : err=>{console.log("err in posting attendance : "+err)}
       }

@@ -5,12 +5,12 @@ import { LoginacComponent } from './loginac/loginac.component';
 
 const routes: Routes = [
   { path : 'login', component : LoginacComponent},
-  { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule), canActivate : [LoginGuard]},
-  { path : '', pathMatch : "full", redirectTo : '/login'}
+  { path: 'user', canActivate : [LoginGuard], loadChildren: () => import('./user/user.module').then(m => m.UserModule)},
+  { path : '**', pathMatch : "full", redirectTo : '/login'}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{useHash : true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

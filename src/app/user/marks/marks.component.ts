@@ -50,7 +50,27 @@ export class MarksComponent implements OnInit {
     if(window.confirm(`Do you want to delete ${this.marks[i].title} Marks?`))
     {        
       let obj = {varSemester : this.varSemester, index : i}
-      this.data.deleteMarks(obj)
+      this.data.deleteMarks(obj).subscribe(
+        {
+          next : data => {
+            alert(data.message)
+            if(data.message=='Login to Continue!!!')
+            {
+              this.router.navigateByUrl("/login")
+            }
+            else{
+              if(data.varSemester)
+              {
+                this.data.updateSemesterMarks(data.data)
+              }
+              else
+              {
+                this.data.updateMarks(data.data)
+              }
+            }
+          }
+        }
+      )
     }
   }
 }
