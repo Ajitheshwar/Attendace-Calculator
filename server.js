@@ -42,16 +42,24 @@ app.post('/login',expressAysncHandler(async(req,res,next)=>{
     {
         let userOfDB = await usersObj.findOne({username : obj.username})
         if(userOfDB!=null){
-
-            let result = await bcrypt.compare(obj.password,userOfDB.password)
-
-            if(!result){
-                res.send({message : "Password is incorrect !!!"})
+            if(req.body.changePassword)
+            {
+                let hashedPwd = await bcrypt.hash(obj.password,6)
+                await usersObj.updateOne({username : obj.username},{$set : {password : hashedPwd}})
+                res.send({message : "Password Changed Succesfully!!!"})    
             }
-            else{
-                let signedtoken = await jwt.sign({username : obj.username},process.env.SecretKey)
-                console.log(signedtoken)
-                res.send({message : "Logged In Successfully",id :userOfDB._id,token : signedtoken})
+            else
+            {       
+                let result = await bcrypt.compare(obj.password,userOfDB.password)
+
+                if(!result){
+                    res.send({message : "Password is incorrect !!!"})
+                }
+                else{
+                    let signedtoken = await jwt.sign({username : obj.username},process.env.SecretKey)
+                    console.log(signedtoken)
+                    res.send({message : "Logged In Successfully",id :userOfDB._id,token : signedtoken})
+                }
             }
         }
         else{

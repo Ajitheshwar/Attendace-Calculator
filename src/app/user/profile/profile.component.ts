@@ -121,7 +121,7 @@ export class ProfileComponent implements OnInit {
   submitForm(ref : any)
   {
     let obj = {edit : false, isLink : this.isLink,delete : false, data : ref.value}
-    console.log(obj)
+    //console.log(obj)
     this.data.submitNoteLinkEdit(obj).subscribe(
       {
         next : data => 

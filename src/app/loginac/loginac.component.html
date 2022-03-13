@@ -47,12 +47,13 @@
                 </div>                
             </div>
             <div class='row mb-3'>
-                <div class="col-4"><label for="password" class='form-label text-dark'>Password</label></div>
+                <div class="col-4"><label for="password" class='form-label text-dark'> <span *ngIf="changePassword"> New </span> Password</label></div>
                 <div class="col-8">
                     <input type="password" id='password' name='password' class='form-control' ngModel #refPassword='ngModel' required autocomplete="off">
                     <p class="text-danger" *ngIf="(ref.submitted || refPassword.touched) && refPassword.errors?.['required']">*Password is required</p>
                 </div>  
             </div>
+            <p class="text-primary text-center"> Forgot Password ? <a style="cursor : pointer" (click)="changePassword = true">Change Password</a></p>
             <button type="submit" class='btn d-block mx-auto py-2 px-3 mb-3 rounded-pill btn-success'>Submit</button>
         </form>
     </div>

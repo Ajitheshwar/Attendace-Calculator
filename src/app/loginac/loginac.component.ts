@@ -13,9 +13,11 @@ export class LoginacComponent implements OnInit {
   constructor( private router : Router, private data :DataService) { }
 
   ngOnInit(): void {
+    this.newUser = false
+    this.changePassword = false
   }
 
-  
+  changePassword = false
   login : boolean = true
   newUser : boolean = false
 
@@ -28,12 +30,13 @@ export class LoginacComponent implements OnInit {
   allowLogin()
   {
     this.newUser = false
+    this.changePassword = false
     //console.log(this.newUser)
   }
 
   submitForm(ref : NgForm)
   {
-    let obj = {newUser : this.newUser, data : ref.value}
+    let obj = {newUser : this.newUser,changePassword : this.changePassword, data : ref.value}
     this.data.loginSignUp(obj).subscribe(
       {
         next : data => {
@@ -54,6 +57,7 @@ export class LoginacComponent implements OnInit {
             else
             {
               alert(data.message)
+              this.changePassword = false
             }
 
           }

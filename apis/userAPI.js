@@ -11,7 +11,7 @@ const verifyToken=(req,res,next)=>{
 
     //get token from header of request object
     let tokenwithBearer=req.header("Authorization")
-    console.log(tokenwithBearer)
+    //console.log(tokenwithBearer)
 
     //If token doesn't exists
     if(tokenwithBearer==undefined){
@@ -105,7 +105,7 @@ userAPIRoute.get("/:uid",asyncHandler(async(req,res,next)=>{
     let usersObj = req.app.get("usersObj")
 
     let id = (req.params.uid)
-    console.log(id)
+    //console.log(id)
 
     let userObjOfDB = await usersObj.findOne({_id : ObjectId(id)})
     res.send({message : userObjOfDB})
@@ -117,7 +117,7 @@ userAPIRoute.put("/:uid/attendance/timetable/addTimeTable",asyncHandler(async(re
     let usersObj = req.app.get("usersObj")
     let uid = (req.params.uid)
     let obj = req.body
-    console.log("timetable  "+uid)
+    //console.log("timetable  "+uid)
 
     await usersObj.updateOne({_id : ObjectId(uid)},{$set : {timetable : obj.timetable, subjects : obj.subjects}})
 
@@ -130,7 +130,7 @@ userAPIRoute.put("/:uid/attendance/postAttendance",asyncHandler(async(req,res,ne
     let obj = req.body
 
     let attendance = await usersObj.findOne({_id : ObjectId(uid)},{_id : 0, subjects : 1, history : 1})
-    console.log(attendance)
+    //console.log(attendance)
 
     for(let x of attendance.subjects)
     {
@@ -158,14 +158,14 @@ userAPIRoute.put("/:uid/marks",asyncHandler(async(req,res,next)=>{
     uid = (req.params.uid)
     obj = req.body
     usersObj = req.app.get("usersObj")
-    console.log(obj)
+    //console.log(obj)
 
     marks = await usersObj.findOne({_id : ObjectId(uid)},{_id : 0, semester : 1, marks : 1})
     if(obj.varSemester)
     {
-        console.log(marks.semester)
+        //console.log(marks.semester)
         marks.semester.splice(obj.index,1)
-        console.log(marks.semester)
+        //console.log(marks.semester)
         await usersObj.updateOne({_id : ObjectId(uid)},{$set : {semester : marks.semester}})
         res.send({message : "Semester Marks Deleted Successfully", data : marks.semester,varSemester : obj.varSemester})
     }

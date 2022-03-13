@@ -17,7 +17,7 @@ export class UserComponent implements OnInit {
     this.ds.getUserInfo(id).subscribe(
     {
       next : data=>{
-        console.log(data)
+        //console.log(data)
         this.ds.updateSubjects(data.message.subjects)
         this.ds.updateTimeTable(data.message.timetable)
         this.ds.updateHistory(data.message.history)
