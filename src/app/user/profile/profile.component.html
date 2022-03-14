@@ -67,22 +67,14 @@
         <h3>Links : <button class="btn btn-light py-2 px-3 me-3 float-end" (click)="isLink = true" data-bs-toggle="modal" data-bs-target="#Modal"> Add Link</button></h3>
         <button class="col-sm-12 col-md-6 btn btn-outline-secondary mb-1 d-flex" *ngFor="let l of links;index as i">
             <a style="text-decoration: none;font-size: 22px; display : block ; width: 100% ;color : white" [href]="l.url">{{l.name}}</a>
-<<<<<<< HEAD
-            <button class="px-3 flex-shrink-1 bd-highlight btn btn-dark" (click)="deleteLink(i)">X</button>
-=======
             <button class="px-3 flex-shrink-1 bd-highlight btn btn-dark" (click)="deleteLink(i)"> X </button>
->>>>>>> b9d8906 (Update profile.component.html)
         </button>
     </div>
     <div class="border border-secondary p-2 rounded mb-3">
         <h3 class="mb-3">Notes : <button class="btn btn-light py-2 px-3 me-3 float-end" (click)="isLink = false" data-bs-toggle="modal" data-bs-target="#Modal">Add Notes</button></h3>
         <div class="mb-2 p-2 rounded border border-secondary d-flex" *ngFor="let n of notes; index as i">
             <div class='p-2 w-100'>{{n}}</div>
-<<<<<<< HEAD
-            <button class="px-3 flex-shrink-1 bd-highlight btn btn-dark" (click)="deleteNote(i)">X </button>
-=======
             <button class="px-3 flex-shrink-1 bd-highlight btn btn-dark" (click)="deleteNote(i)"> X </button>
->>>>>>> b9d8906 (Update profile.component.html)
         </div>
     </div>
 </div>
