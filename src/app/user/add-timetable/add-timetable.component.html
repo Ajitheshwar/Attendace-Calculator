@@ -9,7 +9,7 @@
                 <span class="me-2 fs-5"><b>Subjects</b></span>
                 <div *ngFor="let s of subjects;index as i" class="text-center mt-1">
                     <div class="border rounded mb-1 d-inline-block px-2 py-1"  style="width: 200px;">{{s.subject}}</div>
-                    <button class="btn btn-danger p-2 ms-1 mb-1" (click)="deleteSubject(i)"><i class="fas fa-trash-alt text-white"></i></button>
+                    <button class="btn btn-danger p-2 ms-1 mb-1" (click)="deleteSubject(i)">Delete</button>
                 </div>
             </div>
             <form #ref="ngForm" (ngSubmit)="addSubject(ref)">
@@ -52,7 +52,7 @@
                 <div class="row px-2">
                     <div *ngFor="let tt of ddtt;index as i" class="col-12 col-md-6 text-center mb-1 border border-secondary rounded p-1">
                         <b>{{tt.subject}}</b> : <p class="d-inline-block mb-0 my-1">{{tt.from}} - {{tt.to}} </p>
-                        <button class='btn btn-danger p-2 my-1 float-end' (click)="deleteddtt(i)"> <i class="fas fa-trash-alt text-white"></i></button>
+                        <button class='btn btn-danger p-2 my-1 float-end' (click)="deleteddtt(i)"> Delete </button>
                     </div>    
                 </div>
                 <form #ref2="ngForm" (ngSubmit)="ref2.form.valid && submitddtt(ref2)" class='mt-3'>
@@ -102,7 +102,7 @@
         </div>
 
         <div *ngFor="let tt of timetable;index as i" class='p-2 my-1 rounded border border-white'>
-            <h4>{{week[tt.day]}} <button class='btn btn-danger float-end p-2' (click)='deletett(i)'><i class="fas fa-trash-alt text-white"></i></button>  </h4>
+            <h4>{{week[tt.day]}} <button class='btn btn-danger float-end p-2' (click)='deletett(i)'>Delete </button>  </h4>
             <div class="row">
                 <div *ngFor="let x of tt.ddtt" class="col-12 col-sm-6 col-lg-4 mb-3">
                     <p class="mb-0"><b>{{x.subject}} : </b></p>  <p class="mb-0 ps-2"> {{x.from}} - {{x.to}}</p>

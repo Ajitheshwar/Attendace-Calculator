@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../user/data.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { DataService } from '../user/data.service';
 })
 export class LoginacComponent implements OnInit {
 
-  constructor( private router : Router, private data :DataService) { }
+  constructor( private router : Router, private data :DataService, private toastr : ToastrService) { }
 
   ngOnInit(): void {
     this.newUser = false
@@ -42,12 +43,20 @@ export class LoginacComponent implements OnInit {
         next : data => {
           if(this.newUser)
           {
-            alert(data.message)
+            if(data.message=="User created successfully!!!")
+            {
+              this.toastr.success(data.message,"Success")
+            }
+            else
+            {
+              this.toastr.warning(data.message,"Warning")
+            }
           }
           else
           {
             if(data['message']=='Logged In Successfully')
             {
+              this.toastr.success(data.message,"Success")
               localStorage.setItem("token",data.token)
               let id = data.id
               this.login = false
@@ -56,7 +65,14 @@ export class LoginacComponent implements OnInit {
             }
             else
             {
-              alert(data.message)
+              if(data.message=="Password Changed Succesfully!!!")
+              {
+                this.toastr.success(data.message,"Success")
+              }
+              else
+              {
+                this.toastr.warning(data.message,"Warning")
+              }
               this.changePassword = false
             }
 

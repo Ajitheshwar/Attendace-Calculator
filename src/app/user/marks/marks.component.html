@@ -9,7 +9,7 @@
             <button class='btn btn-light px-2 mx-1 ' (click)='getSemesterMarks()'> Semester </button>
         </div>
         <div *ngFor="let m of marks;index as i" class='mb-3 border border-secondary rounded p-3 row'>
-            <button class="btn btn-outline-dark w-100 text-white text-start" type="button" data-bs-toggle="collapse" attr.data-bs-target="#i{{i}}" aria-expanded="false" attr.aria-controls="#{{m.title}}"><h3>{{m.title}} - {{m.SGPA}} <button class='ms-2 mt-1 p-2 btn btn-danger float-end' (click)='deleteMarks(i)'><i class="fas fa-trash-alt text-white"></i></button></h3></button>
+            <button class="btn btn-outline-dark w-100 text-white text-start" type="button" data-bs-toggle="collapse" attr.data-bs-target="#i{{i}}" aria-expanded="false" attr.aria-controls="#{{m.title}}"><h3>{{m.title}} - {{m.SGPA}} <button class='ms-2 mt-1 p-2 btn btn-danger float-end' (click)='deleteMarks(i)'>Delete</button></h3></button>
             <div class="collapse pt-3 row" id="i{{i}}">
                 <div *ngFor="let x of m.marks" class="col-12 col-sm-6 col-lg-4 mb-3">
                     <div class='fs-5'>{{x.subject}}</div>

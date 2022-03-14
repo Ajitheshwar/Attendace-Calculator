@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../data.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { DataService } from '../data.service';
 export class HistoryComponent implements OnInit {
 
 
-  constructor(private data : DataService, private router : Router) { }
+  constructor(private data : DataService, private router : Router, private toastr : ToastrService) { }
 
   ngOnInit(): void {
 
@@ -39,9 +40,17 @@ export class HistoryComponent implements OnInit {
     if(y.subjectTotal + y.total == 0)
       return 100
     else  
-      return Math.trunc(100*(y.subjectAttended + y.attended) / (y.subjectTotal + y.total))
+      return Math.trunc(100*(this.calculateTotal(y.subjectAttended, y.attended)) / (this.calculateTotal(y.subjectTotal, y.total)))
   }
 
+  calculateTotal(y1 : any, y2 : any)
+  {
+    let y = y1+y2;
+    if(y<0)
+      return 0;
+    else
+      return y;
+  }
   dateSubmit(dateForm : NgForm)
   {
     this.errDate=false
@@ -116,7 +125,7 @@ export class HistoryComponent implements OnInit {
     this.data.clearHistory().subscribe(
       {
         next : data =>{ 
-          alert(data.message)
+          this.toastr.info(data.message, "Info")
           if(data.message=='Login to Continue!!!')
             {
               this.router.navigateByUrl("/login")

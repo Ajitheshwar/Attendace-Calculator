@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../data.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { DataService } from '../data.service';
 })
 export class MarkAttendanceComponent implements OnInit {
 
-  constructor(private data : DataService,private router : Router) { }
+  constructor(private data : DataService,private router : Router,private toastr : ToastrService) { }
 
 
   ngOnInit(): void {
@@ -131,7 +132,7 @@ export class MarkAttendanceComponent implements OnInit {
       this.data.postAttendance(obj).subscribe(
         {
           next : data =>{
-                   alert(data.message)
+                    this.toastr.success(data.message,"Success")
                    this.data.updateSubjects(data.data.subjects)
                    this.data.updateHistory(data.data.history)
                  },
@@ -262,7 +263,7 @@ export class MarkAttendanceComponent implements OnInit {
     this.data.postAttendance(obj).subscribe(
        {
          next : data =>{
-                  alert(data.message)
+                  this.toastr.success(data.message,"Success")
                   if(data.message=='Login to Continue!!!')
                   {
                     this.router.navigateByUrl("/login")

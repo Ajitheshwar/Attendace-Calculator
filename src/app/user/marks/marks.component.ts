@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../data.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { DataService } from '../data.service';
 })
 export class MarksComponent implements OnInit {
 
-  constructor(private router : Router,private data : DataService) { }
+  constructor(private router : Router,private data : DataService, private toastr : ToastrService) { }
 
   ngOnInit(): void {
     this.getSemesterMarks()
@@ -53,7 +54,7 @@ export class MarksComponent implements OnInit {
       this.data.deleteMarks(obj).subscribe(
         {
           next : data => {
-            alert(data.message)
+            this.toastr.info(data.message,"Info")
             if(data.message=='Login to Continue!!!')
             {
               this.router.navigateByUrl("/login")

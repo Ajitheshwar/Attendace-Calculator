@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../data.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { DataService } from '../data.service';
 })
 export class AddTimetableComponent implements OnInit {
 
-  constructor(private data : DataService, private router : Router) { }
+  constructor(private data : DataService, private router : Router, private toastr : ToastrService) { }
 
   ngOnInit(): void {
     
@@ -199,7 +200,7 @@ export class AddTimetableComponent implements OnInit {
       this.data.setTimetable(this.timetable,this.subjects).subscribe(
         {
           next : data =>{ 
-            alert(data.message)
+            this.toastr.success(data.message,"Success")
             if(data.message=='Login to Continue!!!')
             {
               this.router.navigateByUrl("/login")

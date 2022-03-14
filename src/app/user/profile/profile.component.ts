@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../data.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { DataService } from '../data.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private data : DataService,private router : Router) { }
+  constructor(private data : DataService,private router : Router, private toastr : ToastrService) { }
 
   ngOnInit(): void {
     console.log(this.userDetails)
@@ -92,7 +93,7 @@ export class ProfileComponent implements OnInit {
     this.data.deleteLinkNote(obj).subscribe(
       {
         next : data => {
-          alert(data.message)
+          this.toastr.info(data.message,"Info")
           this.data.updateNotes(data.data)
         },
         error : err=> {console.log("error in deleting notes "+ err)}
@@ -108,7 +109,7 @@ export class ProfileComponent implements OnInit {
       this.data.deleteLinkNote(obj).subscribe(
         {
           next : data => {
-            alert(data.message)
+            this.toastr.info(data.message,"Info")
             this.data.updateLinks(data.data)
           },
           error : err=> {console.log("error in deleting link "+ err)}
@@ -126,13 +127,14 @@ export class ProfileComponent implements OnInit {
       {
         next : data => 
         {
-          alert(data.message)
           if(data.message == "Login to Continue!!!")
           {
+            this.toastr.info(data.message, "Info")
             this.router.navigateByUrl("/login")
           }
           else
           {
+            this.toastr.success(data.message,"Success")
             if(this.isLink)
             {
               this.data.updateLinks(data.data)
@@ -155,7 +157,7 @@ export class ProfileComponent implements OnInit {
     this.data.submitNoteLinkEdit(obj).subscribe(
       {
         next : data =>{
-          alert(data.message)
+          this.toastr.success(data.message,"Success")
           this.data.updateUserDetails(data.data)
         }
       }

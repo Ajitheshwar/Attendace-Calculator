@@ -36,8 +36,8 @@
                             <p style = 'font-size: 18px;'>{{y.subject}}</p>
                         </div>
                         <div class="card-footer ">
-                            <p *ngIf='y.attended==0' class='mb-2 bg-danger rounded py-1 ps-3'>{{y.subjectAttended}}+{{y.attended}}/{{y.subjectTotal}}+{{y.total}} =>{{y.subjectAttended + y.attended}}/{{y.subjectTotal + y.total}} ({{calculatePercentage(y)}}%) </p>
-                            <p *ngIf='y.attended!=0' class='mb-2 bg-success rounded py-1 ps-3'>{{y.subjectAttended}}+{{y.attended}}/{{y.subjectTotal}}+{{y.total}} =>{{y.subjectAttended + y.attended}}/{{y.subjectTotal + y.total}} ({{calculatePercentage(y)}}%) </p>
+                            <p *ngIf='y.attended==0' class='mb-2 bg-danger rounded py-1 ps-3'>(({{y.subjectAttended}})+({{y.attended}}))/(({{y.subjectTotal}})+({{y.total}})) =>{{calculateTotal(y.subjectAttended, y.attended)}}/{{calculateTotal(y.subjectTotal, y.total)}} ({{calculatePercentage(y)}}%) </p>
+                            <p *ngIf='y.attended!=0' class='mb-2 bg-success rounded py-1 ps-3'>(({{y.subjectAttended}})+({{y.attended}}))/(({{y.subjectTotal}})+({{y.total}})) =>{{calculateTotal(y.subjectAttended, y.attended)}}/{{calculateTotal(y.subjectTotal, y.total)}} ({{calculatePercentage(y)}}%) </p>
                         </div>
                     </div>
                 </div>

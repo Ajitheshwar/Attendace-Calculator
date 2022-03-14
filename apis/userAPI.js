@@ -142,6 +142,10 @@ userAPIRoute.put("/:uid/attendance/postAttendance",asyncHandler(async(req,res,ne
                 y.subjectTotal = x.total
                 x.attended += y.attended
                 x.total += y.total
+                if(x.attended<0)
+                    x.attended=0
+                if(x.total<0)
+                    x.total = 0
                 break;
             }
         }

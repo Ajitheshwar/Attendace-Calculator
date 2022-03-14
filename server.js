@@ -57,7 +57,7 @@ app.post('/login',expressAysncHandler(async(req,res,next)=>{
                 }
                 else{
                     let signedtoken = await jwt.sign({username : obj.username},process.env.SecretKey)
-                    console.log(signedtoken)
+                    //console.log(signedtoken)
                     res.send({message : "Logged In Successfully",id :userOfDB._id,token : signedtoken})
                 }
             }
